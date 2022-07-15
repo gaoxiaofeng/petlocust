@@ -1,0 +1,7 @@
+paho-mqtt
+locust
+pycryptodome
+cryptography
+redis
+orjson
+ansible

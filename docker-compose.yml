@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  master:
+    image: fiturepet:v1.2
+    ports:
+      - "8090:8090"
+      - "5557:5557"
+      - "5558:5558"
+    volumes:
+      - ./:/mnt/locust
+      - ./docker/hosts:/etc/hosts
+    command: -f /mnt/locust/${FILE} --master -P 8090
+
+  worker:
+    image: fiturepet:v1.2
+    volumes:
+      - ./:/mnt/locust
+      - ./docker/hosts:/etc/hosts
+    command: -f /mnt/locust/${FILE} --worker --master-host 10.120.0.14
+    depends_on:
+      - master
